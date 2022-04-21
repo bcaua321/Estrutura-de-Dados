@@ -8,9 +8,12 @@ public class Program
         lista.Add(32);
         lista.Add(98);
         lista.Add(23);
-
         lista.Add(54);
         // lista.Percorre();
+        lista.Print();
+        
+        lista.Remove(4);
+        Console.WriteLine();
         lista.Print();
     }
 }

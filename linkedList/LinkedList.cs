@@ -14,7 +14,7 @@ public class LinkedList<T>
             set { val = value; }
         }
 
-        private Node next;
+        private Node? next;
         public Node Next 
         {
             get { return next; }
@@ -23,85 +23,92 @@ public class LinkedList<T>
     
     }
 
-    private Node head;
-    private Node current;
+    private Node? _head;
+    private Node? _current;
+    private Node? _prev;
 
     public LinkedList()
     {
-        head = null;
+        _head = null;
     }
 
+    /// <summary>
+    ///  Will add element in the last position
+    /// </summary>
+    /// <param name="item">Generic</param>
     public void Add(T item)
     {
-        current = head;   
-        if(head == null)
+        _current = _head;   
+        if(_head == null)
         {
             Node val = new Node(item);
-            head = val;
+            _head = val;
             return;
         } 
 
         while(true)
         {
-            if (current.Next == null)
+            if (_current.Next == null)
             {
                 Node val = new Node(item);
-                current.Next = val;
+                _current.Next = val;
                 return;
             }
             
-            current = current.Next;
+            _current = _current.Next;
         } 
     }
 
-    public void Remove(int index = 0) 
+    /// <summary>
+    ///  Will remove the element by index
+    /// </summary>
+    /// <param name="index">int</param>
+    public void Remove(int index = 0)
     {
         int aux = 0;
-        current = head;
 
-        if(index == 0)
+        if (_head == null)
         {
-            current = head.Next;
+            Console.Write("Lista vazia");
             return;
         }
 
-        while(true)
+        _current = _head;
+        _prev = null;
+        
+        if(index == 0)
         {
-            if(current.Next == null && aux <= index - 1)
+            _head = _current.Next;
+            return;
+        }
+
+        while(_current != null)
+        {
+            if (aux == index)
             {
-                Console.WriteLine("Não foi possivel deletar, pois não foi encontrado o elemento");
+                _prev.Next = _current.Next;
+                return;
+            } 
+            
+            if (aux < index && _current.Next == null)
+            {
+                Console.WriteLine("Não foi possível remover este elemento");
                 return;
             }
 
-            if(index == aux)
-            {
-                if(current.Next == null)
-                {
-                    return;
-                }
-
-                current = current.Next;
-                current.Next = null;
-            }
-            
-            current = current.Next;
+            _prev = _current;
+            _current = _current.Next;
             aux++;
         }
     }
 
     public void Print()
     {
-        current = head;
-        while(current != null)
+        _current = _head;
+        while(_current != null)
         {
-            Console.WriteLine(current.Val);
-            current = current.Next;
+            Console.WriteLine(_current.Val);
+            _current = _current.Next;
         }
     }
-
-    public void linkedPrint()
-    {
-     
-    }
-
 }
