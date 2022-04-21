@@ -37,6 +37,7 @@ public class LinkedList<T>
         if(head == null)
         {
             Node val = new Node(item);
+            head = val;
             return;
         } 
 
