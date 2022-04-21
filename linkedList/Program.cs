@@ -11,6 +11,6 @@ public class Program
 
         lista.Add(54);
         // lista.Percorre();
-        lista.listaLinkada();
+        lista.Print();
     }
 }
